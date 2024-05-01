@@ -1,4 +1,0 @@
-* Create RSS Feed (XML)
-* Create Dockerfile for Server
-* Test
-* Adopt!

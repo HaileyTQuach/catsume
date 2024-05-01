@@ -9,6 +9,10 @@ from libcatsume import SpcaScraper
 
 def create_rss_feed(output, language="en"):
     """Creates an RSS feed from the output of scraped data."""
+    # Define the namespace for media
+    ET.register_namespace('media', 'http://search.yahoo.com/mrss/')
+    ns_media = {'media': 'http://search.yahoo.com/mrss/'}
+
     rss = ET.Element("rss", version="2.0", attrib={"xmlns:media": "http://search.yahoo.com/mrss/"})
     channel = ET.SubElement(rss, "channel")
     ET.SubElement(channel, "title").text = "Montreal SPCA Adoptions"
@@ -24,14 +28,16 @@ def create_rss_feed(output, language="en"):
             description_text = f"Species: {details.get('species', 'Unknown')}, Age: {details.get('age', 'Unknown')}, Sex: {details.get('sex', 'Unknown')}, Size: {details.get('size', 'Unknown')}"
             ET.SubElement(item, "description").text = description_text
 
-            # Include the image URL as a thumbnail in the RSS feed
             if 'image_url' in animal:
+                print(f"Adding image with URL: {animal['image_url']}")  # Debugging print
                 media_content = ET.SubElement(item, "media:content", attrib={
                     "url": animal['image_url'],
                     "type": "image/jpeg"
                 })
 
-    return ET.tostring(rss, encoding='utf8', method='xml').decode('utf8')
+    xml_string = ET.tostring(rss, encoding='utf8', method='xml').decode('utf8')
+    # print(xml_string)  # Debugging print of the final XML
+    return xml_string
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(
