@@ -5,7 +5,7 @@ import json
 import logging
 import xml.etree.ElementTree as ET
 
-from libcatsume import SpcaScraper
+from .spca_scraper import SpcaScraper
 
 def create_rss_feed(output, language="en"):
     """Creates an RSS feed from the output of scraped data."""
@@ -29,7 +29,6 @@ def create_rss_feed(output, language="en"):
             ET.SubElement(item, "description").text = description_text
 
             if 'image_url' in animal:
-                print(f"Adding image with URL: {animal['image_url']}")  # Debugging print
                 media_content = ET.SubElement(item, "media:content", attrib={
                     "url": animal['image_url'],
                     "type": "image/jpeg"
