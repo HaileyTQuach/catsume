@@ -9,7 +9,7 @@ from libcatsume import SpcaScraper
 
 def create_rss_feed(output, language="en"):
     """Creates an RSS feed from the output of scraped data."""
-    rss = ET.Element("rss", version="2.0")
+    rss = ET.Element("rss", version="2.0", attrib={"xmlns:media": "http://search.yahoo.com/mrss/"})
     channel = ET.SubElement(rss, "channel")
     ET.SubElement(channel, "title").text = "Montreal SPCA Adoptions"
     ET.SubElement(channel, "link").text = "http://spca.com"
