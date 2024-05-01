@@ -25,10 +25,11 @@ def create_rss_feed(output, language="en"):
             ET.SubElement(item, "description").text = description_text
 
             # Include the image URL as a thumbnail in the RSS feed
-            if "image_url" in animal:
-                enclosure = ET.SubElement(item, "enclosure")
-                enclosure.set("url", animal['image_url'])
-                enclosure.set("type", "image/jpeg")
+            if 'image_url' in animal:
+                media_content = ET.SubElement(item, "media:content", attrib={
+                    "url": animal['image_url'],
+                    "type": "image/jpeg"
+                })
 
     return ET.tostring(rss, encoding='utf8', method='xml').decode('utf8')
 
