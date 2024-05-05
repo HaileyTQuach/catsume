@@ -1,0 +1,10 @@
+services:
+  catsume:
+    ports:
+      - "4000:80"
+    image: "catsume"
+    container_name: "catsume"
+    volumes:
+      - type: bind
+        source: "C:\\Users\\VanHalesing\\Desktop\\catsume\\libcatsume"
+        target: "/home"

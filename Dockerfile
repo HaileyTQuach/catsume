@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV PYTHONPATH /app/libcatsume
 
 # Define the command to run the app
-CMD ["python", "-m", "libcatsume", "--cats"]
+CMD ["python", "-m", "libcatsume", "--cats", "--server"]
